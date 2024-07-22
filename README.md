@@ -1,37 +1,29 @@
 # Entry projekt - Seznam Flutter Vývojář
 
-Toto jsou instrukce pro kandidáty na flutter vývojáře v Seznamu. Jde o velmi malý projekt určený pro otestování základních dovedností. Pro úkol není relevantní design, pouze kód a druhotně UX. Projekt je navržen tak, aby byl zpracovatelný pro všechny úrovně od juniora po seniora, vypracujte jej dle vlastních schopností. Není očekáváno, že každý zvládne vše na 100%.
+## Setup
 
+### FVM
+This project uses FVM (Flutter Version Manager). It is recommended to install FVM instructions [here](https://fvm.app/documentation/getting-started/installation). It is also possible to use local installation of Flutter.
 
-## Popis
+### Build Runner
+This project uses build runner so before launching the app please run the following command to generate all the required files. They are committed to git as well but just in case regenerate them.
 
-Vytvořte repozitář na [GitHubu](https://github.com/) s Flutter aplikací pracující s [Placeholder API](https://jsonplaceholder.typicode.com/). Na tomto úkolu demonstrujte dobrou práci s Rest Api, Dartem a Flutterem. Primárně je třeba vypracovat **povinné zadání** a až poté doporučuji pracovat na bonusových bodech. Bonusové body nejsou povinné, ovšem mohou významně pomoci. Úkol lze pojmout jednoduše a vypracovat velmi rychle, zároveň je možné na něm prokázat porozumění architektuře a design patternům. Jak řešení, tak architekturu vyberte vhodně vůči projektu, ovšem zamyslete se i nad teoretickým rozšířením ("není vhodné vše overengineerovat, ale ukažte, že chápete softwarové principy").
+```bash
+fvm dart run build_runner build --delete-conflicting-outputs
+```
 
+## Project Description
 
-## Povinné zadání
+Project uses Placeholder API as required by the assignment. The project uses [Riverpod](https://pub.dev/packages/flutter_riverpod) as recommended by the assignment. 
+Furthermore the project uses [Freezed](https://pub.dev/packages/freezed) and [Json_Serializable](https://pub.dev/packages/json_serializable) to generate immutable objects with json serialization.
+There is also local storage of comments using [Hive](https://pub.dev/packages/hive) as recommended.
+Additionally there is implemented form validation using the built-in [Form](https://api.flutter.dev/flutter/widgets/Form-class.html) widget.
+There are also some animations done using [Flutter_Staggered_Animations](https://pub.dev/packages/flutter_staggered_animations).
+Routing is accomplished using [GoRouter](https://pub.dev/packages/go_router).
 
-- Obrazovka umožňující procházet jednotlivé posty `/posts`
-- Obrazovka s detailem postu, zobrazující jeho informace a komentáře `/posts/{id}/comments`
-- Možnost přidat vlastní komentář k postu obsahující email a text. Forma dle vlastního výběru (obrazovka / bottom sheet / něco jiného...).
-- Použití vhodného řešení stavu - [Riverpod](https://pub.dev/packages/flutter_riverpod) je silně doporučen, ale je možné si obhájit i jiné
+## Git usage
+There is a very limited git usage. Only one commit that contains everything because I noticed just at the end that I am supposed to create a repository and use it :D .
 
-  
-
-## Bonusové body
-
-- Animace jakékoliv formy (implicitní, explicitní, [Rive](https://pub.dev/packages/rive), [Lottie](https://pub.dev/packages/lottie),...) 
-- Lokální ukládání vlastních komentářů - [Hive](https://pub.dev/packages/hive) silně doporučen, ale je možné si obhájit i jiné
-- Použití interceptorů (například logování komunikace)
-- Využití dalších endpointů (například pro práci s obrázky)
-- Cokoliv dalšího, co vás napadne a chcete ukázat
-
-
-## Tipy
-
-- Pro animace je výborná knihovna [Flutter Animate](https://pub.dev/packages/flutter_animate)
-- Pro neprimitivní tipy v Hive je vhodné použít type adaptéry
-- Zamyslete se nad ošetřením erroru a načítáním dat
-
-## Výstup
-
-Výstupem by měl být Github repozitář, obsahující kód a **README.MD s instrukcemi pro spuštění aplikace**. Nezapomeňte uvést všechny potřebné kroky (například v případě použití generování souborů). README by také měl obsahovat stručný popis všeho, co jste použili a to zejména všeho nad rámec zadání. Formalita ani rozsah Readme není relevantní, ale snažte se obsáhnout vše a pokud možno stručně (Aby se to lépe kontrolovalo). Veškeré postřehy a komentáře můžete rovněž uvést do README.
+## Additional notes
+- Enjoyed the project I wanted to try Riverpod for some time. Usually I use [Bloc](https://bloclibrary.dev/).
+- The placeholder api returns slightly different data types on different endpoints for the same entities. E.g. GET /posts/1/comments returns comments with postId as integer while POST /posts/1/comments returns the newly created comment with postId as string. Just a random weird thing I noticed during implementation.
